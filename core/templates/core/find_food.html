@@ -13,25 +13,69 @@
 <section class="section">
     <div class="container">
         {% if donations %}
-        <div class="cards-grid">
+        <!-- Interactive Toolbar -->
+        <div class="food-filter-toolbar card">
+            <div class="search-box-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="foodSearch" class="search-input" placeholder="Search by food name, donor, or location..." aria-label="Search food">
+                <button id="clearSearchBtn" class="clear-search-btn" style="display: none;" title="Clear search">✕</button>
+            </div>
+            <div class="filter-pills-row">
+                <div class="filter-pills">
+                    <button type="button" class="filter-pill active" data-category="ALL">All Items</button>
+                    <button type="button" class="filter-pill" data-category="PREPARED">🍲 Prepared</button>
+                    <button type="button" class="filter-pill" data-category="BAKED">🥖 Baked</button>
+                    <button type="button" class="filter-pill" data-category="PRODUCE">🥗 Produce</button>
+                    <button type="button" class="filter-pill" data-category="PACKAGED">📦 Packaged</button>
+                </div>
+                <div class="sort-wrapper">
+                    <label for="foodSortSelect" class="sort-label">Sort:</label>
+                    <select id="foodSortSelect" class="sort-select">
+                        <option value="urgency">⏳ Expiring Soonest</option>
+                        <option value="qty-desc">📈 Quantity (High to Low)</option>
+                        <option value="qty-asc">📉 Quantity (Low to High)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-results-info">
+                <span id="resultsCount">Showing {{ donations|length }} available donations</span>
+            </div>
+        </div>
+
+        <div class="cards-grid" id="donationsGrid">
             {% for donation in donations %}
-            <div class="card fade-in">
+            <div class="card donation-card fade-in" 
+                 data-food-name="{{ donation.food_name|lower }}"
+                 data-donor="{{ donation.donor_name|lower }}"
+                 data-location="{{ donation.location|lower }}"
+                 data-type="{{ donation.food_type }}"
+                 data-quantity="{{ donation.quantity }}"
+                 data-expires-iso="{{ donation.available_until|date:'c' }}">
                 <div class="card-header">
                     <h3 class="card-title">{{ donation.food_name }}</h3>
                     <span class="badge badge-{{ donation.priority.class }}">{{ donation.priority.icon }} {{ donation.priority.label }}</span>
                 </div>
                 <div class="card-body">
-                    <p><strong>Quantity:</strong> {{ donation.quantity }} meals</p>
+                    <p><strong>Quantity:</strong> <span class="qty-highlight">{{ donation.quantity }} meals</span></p>
                     <p><strong>Donor:</strong> {{ donation.donor_name }}</p>
-                    <p><strong>Location:</strong> {{ donation.location }}</p>
-                    <p><strong>Available until:</strong> {{ donation.time_left }}</p>
+                    <p><strong>Location:</strong> 📍 {{ donation.location }}</p>
+                    <p><strong>Type:</strong> <span class="food-type-tag">{{ donation.get_food_type_display }}</span></p>
+                    <p><strong>Available until:</strong> <span class="live-countdown" data-expires="{{ donation.available_until|date:'c' }}">{{ donation.time_left }}</span></p>
                 </div>
                 <div class="card-footer">
-                    <a href="{% url 'claim_confirm' pk=donation.pk %}" class="btn btn-primary">Claim This Food</a>
+                    <a href="{% url 'claim_confirm' pk=donation.pk %}" class="btn btn-primary btn-claim">Claim This Food</a>
                 </div>
             </div>
             {% endfor %}
         </div>
+
+        <div id="noFilterResults" class="empty-state" style="display: none; margin-top: 32px;">
+            <div class="success-icon">🔍</div>
+            <h2>No Matching Food Found</h2>
+            <p>Try adjusting your search query or selecting a different category filter.</p>
+            <button id="resetFiltersBtn" class="btn btn-secondary" style="margin-top: 12px;">Reset All Filters</button>
+        </div>
+
         {% else %}
         <div class="empty-state">
             <div class="success-icon">🍽️</div>

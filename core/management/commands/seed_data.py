@@ -90,6 +90,50 @@ class Command(BaseCommand):
                 note='Packaged for individual servings',
                 status='CLAIMED'
             ),
+            Donation(
+                food_name='Fresh Fruits Basket',
+                quantity=20,
+                food_type='produce',
+                donor_name='Fresh Mart Grocery',
+                location='12 Civil Lines, Jaipur',
+                prepared_at=now - timedelta(hours=1),
+                available_until=now + timedelta(hours=4),
+                note='Apples, bananas, oranges — ready to distribute',
+                status='AVAILABLE'
+            ),
+            Donation(
+                food_name='Juice & Smoothies',
+                quantity=35,
+                food_type='beverages',
+                donor_name='Healthy Sip Bar',
+                location='67 MG Road, Bangalore',
+                prepared_at=now - timedelta(minutes=30),
+                available_until=now + timedelta(hours=1, minutes=30),
+                note='Mango, banana, and mixed berry smoothies',
+                status='AVAILABLE'
+            ),
+            Donation(
+                food_name='Samosa & Pakora',
+                quantity=45,
+                food_type='prepared',
+                donor_name='Delhi Street Kitchen',
+                location='9 Chandni Chowk, Delhi',
+                prepared_at=now - timedelta(hours=2),
+                available_until=now + timedelta(hours=3),
+                note='Crispy snacks, perfect for evening distribution',
+                status='AVAILABLE'
+            ),
+            Donation(
+                food_name='Bread Loaves & Buns',
+                quantity=30,
+                food_type='baked',
+                donor_name='Golden Bakery',
+                location='42 FC Road, Pune',
+                prepared_at=now - timedelta(hours=3),
+                available_until=now + timedelta(hours=6),
+                note='Freshly baked whole wheat bread and dinner rolls',
+                status='AVAILABLE'
+            ),
         ]
 
         for d in donations:

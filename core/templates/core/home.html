@@ -90,8 +90,8 @@
                 <div class="card-body">
                     <p><strong>Quantity:</strong> {{ donation.quantity }} meals</p>
                     <p><strong>Donor:</strong> {{ donation.donor_name }}</p>
-                    <p><strong>Location:</strong> {{ donation.location }}</p>
-                    <p><strong>Available until:</strong> {{ donation.time_remaining }}</p>
+                    <p><strong>Location:</strong> 📍 {{ donation.location }}</p>
+                    <p><strong>Available until:</strong> <span class="live-countdown" data-expires="{{ donation.available_until|date:'c' }}">{{ donation.time_remaining }}</span></p>
                 </div>
                 <div class="card-footer">
                     <a href="{% url 'claim_confirm' pk=donation.pk %}" class="btn btn-primary">Claim This Food</a>

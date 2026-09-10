@@ -5,10 +5,19 @@
 {% block content %}
 <section class="form-section">
     <div class="form-card">
-        <h1>Donate Surplus Food</h1>
         <p>Share your surplus food with organizations that can put it to good use. Fill out the details below.</p>
 
-        <form method="post" action="{% url 'donate' %}">
+        <!-- Quick Demo Presets -->
+        <div class="preset-helper-box">
+            <span class="preset-label">⚡ Quick Fill Demo:</span>
+            <div class="preset-chips">
+                <button type="button" class="preset-btn" data-preset="banquet">🍱 Banquet Leftovers (45 meals)</button>
+                <button type="button" class="preset-btn" data-preset="bakery">🥖 Artisan Bakery (25 meals)</button>
+                <button type="button" class="preset-btn" data-preset="produce">🥗 Fresh Veggies (30 meals)</button>
+            </div>
+        </div>
+
+        <form method="post" action="{% url 'donate' %}" id="donationForm">
             {% csrf_token %}
 
             <div class="form-group">

@@ -18,9 +18,14 @@
                 <span class="logo-icon">🍽️</span>
                 <span class="logo-text">FoodBridge</span>
             </a>
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <span class="hamburger"></span>
-            </button>
+            <div class="navbar-actions">
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle dark/light mode" title="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
             <ul class="nav-links">
                 <li><a href="{% url 'home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
                 <li><a href="{% url 'donate' %}" class="nav-link {% if request.resolver_match.url_name == 'donate' %}active{% endif %}">Donate Food</a></li>
