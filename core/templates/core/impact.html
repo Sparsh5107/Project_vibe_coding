@@ -1,0 +1,97 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Impact - FoodBridge{% endblock %}
+
+{% block content %}
+<section class="impact-header">
+    <div class="container">
+        <h1>Our Collective Impact</h1>
+        <p>Every donation and every claim creates a ripple effect of positive change in our community.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="impact-stats">
+            <div class="impact-card fade-in">
+                <div class="impact-card-icon">🍽️</div>
+                <div class="impact-card-number">{{ total_rescued }}</div>
+                <div class="impact-card-label">Meals Rescued</div>
+            </div>
+            <div class="impact-card fade-in">
+                <div class="impact-card-icon">📦</div>
+                <div class="impact-card-number">{{ food_saved_kg|floatformat:1 }}</div>
+                <div class="impact-card-label">Kg Food Saved</div>
+            </div>
+            <div class="impact-card fade-in">
+                <div class="impact-card-icon">🤝</div>
+                <div class="impact-card-number">{{ total_connections }}</div>
+                <div class="impact-card-label">Successful Connections</div>
+            </div>
+            <div class="impact-card fade-in">
+                <div class="impact-card-icon">🏢</div>
+                <div class="impact-card-number">12</div>
+                <div class="impact-card-label">Partner Organizations</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-title">
+            <h2>Impact Breakdown</h2>
+            <p>See how our community is making a difference</p>
+        </div>
+        <div class="bar-chart">
+            <div class="bar-item fade-in">
+                <div class="bar-header">
+                    <span class="bar-label">Prepared Meals</span>
+                    <span class="bar-value">45%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width: 45%;"></div>
+                </div>
+            </div>
+            <div class="bar-item fade-in">
+                <div class="bar-header">
+                    <span class="bar-label">Baked Goods</span>
+                    <span class="bar-value">25%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width: 25%;"></div>
+                </div>
+            </div>
+            <div class="bar-item fade-in">
+                <div class="bar-header">
+                    <span class="bar-label">Fresh Produce</span>
+                    <span class="bar-value">20%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width: 20%;"></div>
+                </div>
+            </div>
+            <div class="bar-item fade-in">
+                <div class="bar-header">
+                    <span class="bar-label">Packaged Food</span>
+                    <span class="bar-value">10%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width: 10%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="narrative fade-in">
+            <h2>Why FoodBridge Matters</h2>
+            <p>Every day, restaurants and events discard large quantities of edible food while communities struggle to find affordable meals. FoodBridge bridges this gap by connecting donors with organizations that can put surplus food to good use.</p>
+            <p>Together, we're not just reducing food waste — we're building a more compassionate and sustainable community. Every meal rescued is a step toward a world where no food goes to waste while people go hungry.</p>
+            <a href="{% url 'donate' %}" class="btn btn-primary">Help Us Rescue More Food</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

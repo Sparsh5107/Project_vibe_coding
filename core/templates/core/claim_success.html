@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Claim Successful - FoodBridge{% endblock %}
+
+{% block content %}
+<section class="success-page">
+    <div class="success-icon">🎉</div>
+    <h1>Claim Successful!</h1>
+    <p>You have successfully claimed this food donation. Please arrange pickup before the available time expires.</p>
+
+    <div class="success-details">
+        <p><strong>Food:</strong> {{ donation.food_name }}</p>
+        <p><strong>Quantity:</strong> {{ donation.quantity }} meals</p>
+        <p><strong>Donor:</strong> {{ donation.donor_name }}</p>
+        <p><strong>Location:</strong> {{ donation.location }}</p>
+        <p><strong>Available until:</strong> {{ donation.available_until|date:"M d, Y H:i" }}</p>
+    </div>
+
+    <div class="success-buttons">
+        <a href="{% url 'find_food' %}" class="btn btn-primary">View More Food</a>
+        <a href="{% url 'impact' %}" class="btn btn-secondary">See Impact</a>
+    </div>
+</section>
+{% endblock %}

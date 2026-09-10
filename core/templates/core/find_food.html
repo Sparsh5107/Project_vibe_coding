@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Find Food - FoodBridge{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Find Available Food</h1>
+        <p>Browse surplus food donations from local donors. Claim what your organization can use.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        {% if donations %}
+        <div class="cards-grid">
+            {% for donation in donations %}
+            <div class="card fade-in">
+                <div class="card-header">
+                    <h3 class="card-title">{{ donation.food_name }}</h3>
+                    <span class="badge badge-{{ donation.priority.class }}">{{ donation.priority.icon }} {{ donation.priority.label }}</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>Quantity:</strong> {{ donation.quantity }} meals</p>
+                    <p><strong>Donor:</strong> {{ donation.donor_name }}</p>
+                    <p><strong>Location:</strong> {{ donation.location }}</p>
+                    <p><strong>Available until:</strong> {{ donation.time_left }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'claim_confirm' pk=donation.pk %}" class="btn btn-primary">Claim This Food</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="success-icon">🍽️</div>
+            <h2>No Food Available Right Now</h2>
+            <p>There are currently no surplus food donations available. Check back soon or donate some food yourself!</p>
+            <a href="{% url 'donate' %}" class="btn btn-primary">Donate Food</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
